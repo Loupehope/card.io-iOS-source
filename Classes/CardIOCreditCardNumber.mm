@@ -31,6 +31,8 @@
       return CardIOCreditCardTypeMastercard;
     case CardTypeDiscover:
       return CardIOCreditCardTypeDiscover;
+    case CardTypeMir:
+      return CardIOCreditCardTypeMir;
     default:
       return CardIOCreditCardTypeUnrecognized;
   }
