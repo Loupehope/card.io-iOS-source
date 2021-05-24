@@ -79,11 +79,14 @@
   CardIOContext *context = [[CardIOContext alloc] init];
   UIViewController *viewController = [[self class] viewControllerWithScanningEnabled:scanningEnabled withContext:context];
 
-  if((self = [super initWithRootViewController:viewController])) {
+  if((self = [super initWithNibName:nil bundle:nil])) {
+    [self setViewControllers:@[viewController] animated:NO];
+
     _context = context;
     _context.scannedImageDuration = (CGFloat) 0.1f;
     _currentViewControllerIsDataEntry = [viewController isKindOfClass:[CardIODataEntryViewController class]];
     _initialInterfaceOrientationForViewcontroller = [UIApplication sharedApplication].statusBarOrientation;
+
 #if USE_CAMERA || SIMULATE_CAMERA
     if(!self.currentViewControllerIsDataEntry) {
       CardIOViewController *cameraVC = (CardIOViewController *)viewController;
@@ -95,6 +98,12 @@
     _paymentDelegate = aDelegate;
     _shouldStoreStatusBarStyle = YES;
   }
+  return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
   return self;
 }
 
